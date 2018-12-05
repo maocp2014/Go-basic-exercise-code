@@ -1,7 +1,7 @@
 package main
 
 import (
-	// "golang.org/x/tour/pic"
+	"golang.org/x/tour/pic"
 	"fmt"
 )
 
@@ -27,5 +27,5 @@ func Pic(dx, dy int) [][]uint8 {
 
 func main() {
 	Pic(4, 4)
-	// pic.Show(Pic)
+	pic.Show(Pic)
 }
