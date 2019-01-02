@@ -41,6 +41,7 @@ func (p point) add(r point) point {
 	return point{p.i + r.i, p.j + r.j}
 }
 
+// 判断当前点是否可走，以及在maze中的值
 func (p point) at(grid [][]int) (int, bool){
 	// 行越界
 	if p.i < 0 || p.i >= len(grid){
@@ -61,46 +62,49 @@ var dirs = [4]point{
 
 // 走迷宫函数
 func walk(maze [][]int, start, end point) [][]int {
-	// 维护的二维切片，表示从起始点到达当前位置所经过的步数
+	// 维护的二维切片，存储从起始点到达当前位置所经过的步数
 	// 0表示未经过的点（起始点除外）
 	steps := make([][]int, len(maze))
     for i := range steps{
 		steps[i] = make([]int, len(maze[i]))
 	}
+	// fmt.Println("steps:",steps)
    
-	// 起始点加入队列 
+	// 起始点加入队列, Q队列表示待探索点的位置
 	Q := []point{start}
 
 	for len(Q) > 0 {
-		cur := Q[0]
-		Q = Q[1:]
+		cur := Q[0]  // 当前点的位置
+		Q = Q[1:] // 去掉当前点位置
 		
+		// 当前点=结束点，退出循环
 		if cur == end{
 			break
 		}
 
+		// 循环4个可探索的方向
 		for _, dir := range dirs{
+			fmt.Println("dir:", dir)
 			next := cur.add(dir)  // 新发现目标点，为实现点位置的加法运算，需要为point结构体定义相应的方法
-		    // 探索点需要满足的条件
+		    // 探索点需要满足的如下条件:
 			// maze在next点的值为0，表示可走
-			// next不能回到start起始点
+			// next不能回到它的上一个位置点start
 			// 当前点到next点的步数为0，否则表示已走过
 			
-			// 表示不能走
+			// 表示不能走（越界或者当前位置的值为1）
 			val, ok := next.at(maze)
 			if !ok || val == 1 {
 				continue
 			}
 			// 已走过
 			val, ok = next.at(steps)
-			if !ok || val == 0 {
+			if !ok || val != 0 {
 				continue
 			}
 			// 回到原点 
 			if next == start {
 				continue
 			}
-
 			// 当前步数
 			curSteps, _ := cur.at(steps) 
 			// next点步数
@@ -129,7 +133,7 @@ func main() {
 
 	for _, row := range steps {
 		for _, val := range row {
-			fmt.Printf("%d ", val)
+			fmt.Printf("%3d ", val)
 		}
 		fmt.Println()
 	}
