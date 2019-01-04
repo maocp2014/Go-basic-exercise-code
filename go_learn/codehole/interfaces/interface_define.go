@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"unsafe"
 )
 
 type Smellable interface {
@@ -53,34 +52,4 @@ func main() {
 
 	s2 = apple
 	s2.eat()
-
-	var user map[string]interface{} = map[string]interface{}{
-		"age":     30,
-		"address": "Tongzhou Beijing",
-		"married": true,
-	}
-	fmt.Println(user)
-
-	// for key,value := range user {
-	// 	fmt.Println(key, value)
-	// }
-
-	// age := user["age"]
-	// address := user["address"]
-	// married := user["married"]
-	var age = user["age"]
-	var address = user["address"]
-	var married = user["married"]
-	fmt.Println(age, address, married)
-	fmt.Printf("%T\n%T\n%T\n", age, address, married)
-
-	var s interface{} // 空接口，值为nil
-	fmt.Println(s)
-	fmt.Println(unsafe.Sizeof(s))
-
-	var arr [10]int = [...]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	fmt.Println(unsafe.Sizeof(arr))
-
-	s = arr
-	fmt.Println(s, unsafe.Sizeof(s))
 }
