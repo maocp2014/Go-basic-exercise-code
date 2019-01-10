@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+// 接口变量占用内存大小
 func main() {
 	var s interface{} // 空接口，值为nil
 	fmt.Println(s)  // nil
