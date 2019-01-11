@@ -207,7 +207,7 @@ func slice_traversing() {
 	
 	// 方式1
 	fmt.Println("subscript of for ")
-	for i :=0; i < len(s1); i++ {
+	for i := 0; i < len(s1); i++ {
 		fmt.Println(i, s1[i])
 	}
 
