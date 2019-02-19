@@ -3,44 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"go_pratice_code/learn_ccmouse_code/functional/fibonacci/fib"
 	"io"
 	"strings"
 )
-
-// 版本1
-// 闭包
-// 斐波那契数列生成器
-/*
-func fibonacci() func() int {
-	a, b := 0, 1
-	return func() int {
-		a, b = b, a+b
-		return a
-	}
-}
-
-func main() {
-	fib := fibonacci() // fib是生成器
-	fmt.Println(fib())
-	fmt.Println(fib())
-	fmt.Println(fib())
-	fmt.Println(fib())
-	fmt.Println(fib())
-	fmt.Println(fib())
-}
-*/
-
-// 版本2
-// 为函数实现io.Reader接口
-
-// 闭包（返回函数进行了重命名）
-func fibonacci() intGen {
-	a, b := 0, 1
-	return func() int { // 这里不能替换成别名
-		a, b = b, a+b
-		return a
-	}
-}
 
 type intGen func() int // 函数类型（类型重命名，实现接口）
 
@@ -70,7 +36,7 @@ func printFileContents(reader io.Reader) {
 }
 
 func main() {
-	f := fibonacci()
+	var f intGen = fib.Fibonacci()
 	// 将f当文件读（实现了io.Reader接口）
 	printFileContents(f)
 }
