@@ -25,7 +25,10 @@ func empty_interface1() {
 
 func empty_interface2() {
 	/*
-		# []T不能直接赋值给[]interface{}，它们是不同的类型
+		// []T不能直接赋值给[]interface{}，它们是不同的类型
+		// interface slice 与 万能类型 empty interface 是不一样的，可以直接将任何类型的值传给万能类型，
+		// 但是不能将任何类型的 slice 直接传给 interface slice，因为 interface slice 并不是万能类型，只是里面装的东西是万能类型，
+		// 所以反过来你也不能直接将 interface slice 强制转换成特定类型的 slice
 		t := []int{1, 2, 3, 4}
 		var s []interface{} = t  // cannot use t (type []int) as type []interface {} in assignment
 	*/
