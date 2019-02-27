@@ -25,7 +25,7 @@ func empty_interface1() {
 
 func empty_interface2() {
 	/*
-		# []T不能直接赋值给[]interface{}
+		# []T不能直接赋值给[]interface{}，它们是不同的类型
 		t := []int{1, 2, 3, 4}
 		var s []interface{} = t  // cannot use t (type []int) as type []interface {} in assignment
 	*/
