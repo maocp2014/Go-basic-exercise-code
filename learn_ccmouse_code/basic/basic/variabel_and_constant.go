@@ -54,18 +54,21 @@ func euler() {
 	fmt.Printf("%.3f\n", cmplx.Exp(1i*math.Pi)+1) //1i表示虚数i
 }
 
-// 强制类型转换（go中不支持类型隐式转换，只能强制转换）
 func triangle() {
 	var a, b int = 3, 4
+	fmt.Println(calcTriangle(a, b))
+}
+
+func calcTriangle(a, b int) int {
 	var c int
-	// 强制类型转换
+	// 强制类型转换（go中不支持类型隐式转换，只能强制转换）
 	c = int(math.Sqrt(float64(a*a + b*b)))
-	fmt.Println(c)
+	return c
 }
 
 // 包内常量： 包内作用域
 // 不用大写
-const aaa = "ddd"  // 
+const aaa = "ddd" //
 // 函数内常量：函数内作用域
 func consts() {
 	// 方式1
@@ -92,25 +95,25 @@ func enums() {
 	// 	cpp = 0
 	// 	java = 1
 	// 	python = 2
-	// 	golang = 3  
+	// 	golang = 3
 	// )
 	// fmt.Println(cpp, java, python, golang)
 	// 方式2
 	const (
 		// iota表示从0开始自增
-		cpp = iota  // 0
-		_  // 占位符，该处值为1
-		python // 2
-		golang // 3
-		javascript // 4
+		cpp        = iota // 0
+		_                 // 占位符，该处值为1
+		python            // 2
+		golang            // 3
+		javascript        // 4
 	)
 	fmt.Println(cpp, python, golang, javascript)
-	
+
 	// iota复杂运算
 	// 字节单位
 	const (
-		b = 1 << (10 * iota)  // 1 << 10 * 0 表示1左移位，即1
-		kb  // 1 << (10 * 1)  // 左移10位，即2的10次方，下面依次类推
+		b  = 1 << (10 * iota) // 1 << 10 * 0 表示1左移位，即1
+		kb                    // 1 << (10 * 1)  // 左移10位，即2的10次方，下面依次类推
 		mb
 		gb
 		tb
@@ -127,12 +130,12 @@ func main() {
 	variableShorter()
 
 	fmt.Println(aa, ss, bb)
-    // 欧拉公式
+	// 欧拉公式
 	euler()
-    // 强制类型转换
+	// 强制类型转换
 	triangle()
-    // 常量 
+	// 常量
 	consts()
-    // 枚举类型
+	// 枚举类型
 	enums()
 }
