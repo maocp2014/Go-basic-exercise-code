@@ -6,7 +6,7 @@ import (
 
 func empty_interface1() {
 	// 类型推导以及赋值
-	// map的值为interface{}，表示value可以为任意类型
+	// map的值为interface{}，表示value可以为任意类型，但是map的value类型是interface{}类型
 	var user = map[string]interface{}{
 		"age":     30,
 		"address": "Beijing Tongzhou",
