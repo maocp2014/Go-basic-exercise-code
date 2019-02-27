@@ -48,7 +48,7 @@ func session(s RetrieverPoster) string {
 	return s.Get(url)
 }
 
-// 查看interface变量有两种方法：1、type switch 2、type assertion
+// 查看interface变量类型有两种方法：1、type switch 2、type assertion
 // 1、type switch
 func inspect(r Retriever) {
 	fmt.Printf("%T %v\n", r, r)

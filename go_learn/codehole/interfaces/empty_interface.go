@@ -4,12 +4,13 @@ import (
 	"fmt"
 )
 
-func main(){
+func empty_interface1() {
 	// 类型推导以及赋值
+	// map的值为interface{}，表示value可以为任意类型
 	var user = map[string]interface{}{
-		"age": 30,
-        "address": "Beijing Tongzhou",
-        "married": true,
+		"age":     30,
+		"address": "Beijing Tongzhou",
+		"married": true,
 	}
 
 	fmt.Println(user)
@@ -20,4 +21,29 @@ func main(){
 	var married = user["married"].(bool)
 
 	fmt.Println(age, address, married)
+}
+
+func empty_interface2() {
+	/*
+		# []T不能直接赋值给[]interface{}
+		t := []int{1, 2, 3, 4}
+		var s []interface{} = t  // cannot use t (type []int) as type []interface {} in assignment
+	*/
+
+	// 正确做法
+	t := []int{1, 2, 3, 4}
+	s := make([]interface{}, len(t))
+
+	//s = append(s, t...)  // cannot use t (type []int) as type []interface {} in append
+	for i, v := range t {
+		// fmt.Println(v)
+		// s = append(s, v)
+		s[i] = v
+	}
+	fmt.Println(s)
+}
+
+func main() {
+	empty_interface1()
+	empty_interface2()
 }
