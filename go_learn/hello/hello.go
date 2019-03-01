@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"time"
 	"unsafe"
-	"math"
 )
 
 func pointerfun() {
@@ -28,13 +28,13 @@ func min(a, b int) int {
 	if a > b {
 		return b
 	}
-    return a
+	return a
 }
 
 func sig(a int) int {
 	if a > 0 {
 		return 1
-	} else if a < 0{
+	} else if a < 0 {
 		return -1
 	} else {
 		return 0
@@ -44,35 +44,35 @@ func sig(a int) int {
 // 值匹配
 func switch_value(score float32) string {
 	switch score / 10 {
-		case 0, 1, 2, 3, 4, 5:
-			return  "差"
-		case 6, 7:
-			return "及格"
-		case 8:
-			return "良"
-		default:
-			return "优" 
+	case 0, 1, 2, 3, 4, 5:
+		return "差"
+	case 6, 7:
+		return "及格"
+	case 8:
+		return "良"
+	default:
+		return "优"
 	}
 }
 
 // 表达式匹配
 func switch_expression(score float32) string {
 	switch {
-		case score < 60:
-			return "差"
-		case score < 80:
-			return "及格"
-		case score < 90:
-			return "良"
-		default:
-			return "优"
+	case score < 60:
+		return "差"
+	case score < 80:
+		return "及格"
+	case score < 90:
+		return "良"
+	default:
+		return "优"
 	}
 }
 
 func gotype() {
 	var i int8 = 1
 	var s string = "hello, string!"
-	var ui uint8  = 1
+	var ui uint8 = 1
 	var f float32 = 3.2
 	fmt.Println(i, s, ui, f)
 }
@@ -109,10 +109,10 @@ func array_1() {
 }
 
 func array_2() {
-	var squares [9]int 
+	var squares [9]int
 
 	for i := 0; i < len(squares); i++ {
-		squares[i] = (i + 1)*(i + 1)
+		squares[i] = (i + 1) * (i + 1)
 	}
 	fmt.Println(squares)
 }
@@ -132,10 +132,10 @@ func array_3() {
 // 只有元素类型和长度相同的数组才能互相赋值，浅拷贝
 func array_assign() {
 	var a [5]int = [5]int{1, 2, 3, 4, 5}
-	var b [5]int 
+	var b [5]int
 	// var b [6]int  // 属于不同类型，不能相互赋值
 
-	b = a 
+	b = a
 	a[0] = 100
 
 	fmt.Println(a)
@@ -144,7 +144,7 @@ func array_assign() {
 
 func array_traversing() {
 	var a [10]int = [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-    // 方式1 
+	// 方式1
 	// for i := 0; i < len(a); i++ {
 	// 	fmt.Println(a[i])
 	// }
@@ -161,11 +161,11 @@ func array_traversing() {
 }
 
 func slice_create() {
-	var s1 []int = make([]int, 8)  //cap 与 len 相同
+	var s1 []int = make([]int, 8) //cap 与 len 相同
 	// var s1 = make([]int, 8)
 	var s2 []int = make([]int, 5, 8)
 	// s2 := make([]int, 5, 8)
-	
+
 	var s3 []int = []int{1, 2, 3, 4, 5}
 	fmt.Println(s1)
 	fmt.Println(s2)
@@ -173,9 +173,9 @@ func slice_create() {
 }
 
 func empty_slice() {
-	var s1 []int  // nil切片
-	var s2 []int = []int{} //空切片
-	var s3 []int = make([]int, 0)  //空切片
+	var s1 []int                  // nil切片
+	var s2 []int = []int{}        //空切片
+	var s3 []int = make([]int, 0) //空切片
 
 	fmt.Println(s1, s2, s3)
 	fmt.Println(len(s1), len(s2), len(s3))
@@ -204,7 +204,7 @@ func slice_traversing() {
 	for i := 0; i < len(s1); i++ {
 		s1[i] = i + 1
 	}
-	
+
 	// 方式1
 	fmt.Println("subscript of for ")
 	for i := 0; i < len(s1); i++ {
@@ -230,7 +230,7 @@ func slice_traversing() {
 	}
 }
 
-func slice_append(){
+func slice_append() {
 	var s1 []int = []int{1, 2, 3, 4, 5}
 	fmt.Printf("%d %d %d %p\n", s1, len(s1), cap(s1), &s1)
 
@@ -294,52 +294,52 @@ func slice_expansion() {
 func map_create() {
 	var m1 map[int]string
 	var m2 map[int]string = make(map[int]string)
-	var m3 map[string]int = map[string]int {
-		"优秀" : 80,
-		"良好" : 76,  // 字符串只能用双引号或反引号，不能用单引号
-		"及格" : 60,  // 此处逗号不能省略，否则报语法错误
+	var m3 map[string]int = map[string]int{
+		"优秀": 80,
+		"良好": 76, // 字符串只能用双引号或反引号，不能用单引号
+		"及格": 60, // 此处逗号不能省略，否则报语法错误
 	}
 
 	fmt.Println(m1, len(m1))
 	fmt.Println(m2, len(m2))
-	fmt.Println(m3, len(m3)) 
+	fmt.Println(m3, len(m3))
 }
 
 func map_ops() {
-	m := map[string]int {
-		"apple": 2,
-        "banana": 5,
-        "orange": 8,
+	m := map[string]int{
+		"apple":  2,
+		"banana": 5,
+		"orange": 8,
 	}
 	fmt.Println(m, len(m))
-   // 读取元素
+	// 读取元素
 	price, ok := m["pear"]
 	if ok {
 		fmt.Println(price)
 	} else {
 		fmt.Println("apple key does not exist!")
 	}
-	
-   // 增加或修改元素
-   m["pear"] = 0
-   price, ok = m["pear"]
-   if ok {
-	   fmt.Println(price)
-   } else {
-	   fmt.Println("pear key does not exist!")
-   }
-   fmt.Println(m, len(m))
 
-   // 删除元素
-   delete(m, "pear")
-   fmt.Println(m, len(m))
+	// 增加或修改元素
+	m["pear"] = 0
+	price, ok = m["pear"]
+	if ok {
+		fmt.Println(price)
+	} else {
+		fmt.Println("pear key does not exist!")
+	}
+	fmt.Println(m, len(m))
+
+	// 删除元素
+	delete(m, "pear")
+	fmt.Println(m, len(m))
 }
 
 func map_traversing() {
-	var m = map[string]int {
-		"apple": 2,
-        "banana": 5,
-        "orange": 8,
+	var m = map[string]int{
+		"apple":  2,
+		"banana": 5,
+		"orange": 8,
 	}
 	fmt.Println(m, len(m))
 
@@ -351,15 +351,15 @@ func map_traversing() {
 		fmt.Println(price)
 	}
 
-	var names []string = make([]string, 0, len(m))  // 空切片，注意参数0
-	var prices []int = make([]int, 0, len(m)) // 空切片
+	var names []string = make([]string, 0, len(m)) // 空切片，注意参数0
+	var prices []int = make([]int, 0, len(m))      // 空切片
 
 	fmt.Println(names, len(names))
 	fmt.Println(prices, len(prices))
 
 	for name, price := range m {
 		names = append(names, name)
-		prices= append(prices, price)
+		prices = append(prices, price)
 	}
 
 	fmt.Println(names, len(names))
@@ -368,21 +368,21 @@ func map_traversing() {
 
 // map占用的内存大小，一个机器字
 func map_sizeof() {
-	var m = map[string]int {
-		"apple": 2,
-        "banana": 5,
-        "orange": 8,
+	var m = map[string]int{
+		"apple":  2,
+		"banana": 5,
+		"orange": 8,
 	}
-	fmt.Println(m, len(m), unsafe.Sizeof(m))  
+	fmt.Println(m, len(m), unsafe.Sizeof(m))
 }
 
 // 字符串按字节遍历
 func string_traversing_by_byte() {
 	var s string = "嘻哈china"
-	
+
 	fmt.Println(s, len(s))
 
-	for i :=0; i < len(s); i++ {
+	for i := 0; i < len(s); i++ {
 		fmt.Printf("%x ", s[i])
 	}
 }
@@ -420,8 +420,8 @@ func string_split() {
 
 func byte_string_conversion() {
 	// 字符串与字节切片不共享底层字节数组
-	var s string = "hello world!"   // 只读
- 	var b []byte = []byte(s)  // 可以修改
+	var s string = "hello world!" // 只读
+	var b []byte = []byte(s)      // 可以修改
 
 	ss := string(b)
 
@@ -429,19 +429,19 @@ func byte_string_conversion() {
 	fmt.Println(b)
 	fmt.Println(ss)
 
-	b[1] = 111  // 验证字节切片可修改
+	b[1] = 111 // 验证字节切片可修改
 	fmt.Println(b)
 }
 
 func struct_create() {
 	// 结构体定义
 	type Circle struct {
-		x int
-		y int
+		x      int
+		y      int
 		Radius int
 	}
 
-	// 创建结构体变量  
+	// 创建结构体变量
 	// 方式1: kv形式（map）
 	// var c1 Circle = Circle {
 	// 	x : 100,
@@ -449,24 +449,24 @@ func struct_create() {
 	// 	Radius : 50,
 	// }
 	// fmt.Printf("%+v\n", c1)
-	
+
 	// var c2 Circle = Circle { Radius : 50 }  //这个不需要加逗号
-    // var cc2 Circle = Circle {
+	// var cc2 Circle = Circle {
 	// 	Radius : 50,  //这样必须要加逗号
 	// }
 
 	// fmt.Printf("%+v\n", c2)
-	
+
 	// var c3 Circle = Circle {} // 零值结构体，所有字段都初始化成相应字段的零值
-    // fmt.Printf("%+v\n", c3)
+	// fmt.Printf("%+v\n", c3)
 
 	// 方式2: 顺序形式，初始化值依次赋值且都不能缺省
 
 	// var c4 Circle = Circle {100, 100, 50}
-    // fmt.Printf("%+v\n", c4)
-	
+	// fmt.Printf("%+v\n", c4)
+
 	// 方式3: 全局new函数
-	
+
 	// 结构体的指针类型
 	// var c5 *Circle = &Circle {100, 100, 50}
 	// fmt.Printf("%+v\n", c5)
@@ -477,7 +477,7 @@ func struct_create() {
 	// 方式4
 	// var c7 Circle   // 零值结构体，所有字段都初始化成相应字段的零值
 	// fmt.Printf("%+v\n", c7)
-	
+
 	// 综上，有3种零值结构体
 	// var c3 Circle = Circle {}
 	// var c6 Circle = new(Circle)
@@ -486,13 +486,13 @@ func struct_create() {
 
 func zero_nil_struct() {
 	type Circle struct {
-		x int
-		y int
+		x      int
+		y      int
 		Radius int
 	}
 
 	var c1 *Circle = nil // nil指针表示无指向的指针
-	var c2  Circle
+	var c2 Circle
 
 	fmt.Println(c1, unsafe.Sizeof(c1))
 	fmt.Println(c2, &c2, unsafe.Sizeof(c2))
@@ -501,30 +501,29 @@ func zero_nil_struct() {
 
 func struct_copy() {
 	type Circle struct {
-		x int
-		y int
+		x      int
+		y      int
 		Radius int
 	}
 
-	var c1 Circle = Circle { Radius : 50, }  // 逗号可以不加
+	var c1 Circle = Circle{Radius: 50} // 逗号可以不加
 	var c2 Circle = c1
 	fmt.Printf("%+v\n", c1)
 	fmt.Printf("%+v\n", c2)
 
 	c1.Radius = 100
-	fmt.Printf("%+v\n", c1)  // {x:0 y:0 Radius:100}
-	fmt.Printf("%+v\n", c2)  // {x:0 y:0 Radius:50}
+	fmt.Printf("%+v\n", c1) // {x:0 y:0 Radius:100}
+	fmt.Printf("%+v\n", c2) // {x:0 y:0 Radius:50}
 
-	var c3 *Circle = &Circle { Radius : 50 }
+	var c3 *Circle = &Circle{Radius: 50}
 	var c4 *Circle = c3
 	fmt.Printf("%+v\n", *c3)
 	fmt.Printf("%+v\n", *c4)
 
 	c3.Radius = 100
-	fmt.Printf("%+v\n", *c3)  // {x:0 y:0 Radius:100}
-	fmt.Printf("%+v\n", *c4)  // {x:0 y:0 Radius:100}
+	fmt.Printf("%+v\n", *c3) // {x:0 y:0 Radius:100}
+	fmt.Printf("%+v\n", *c4) // {x:0 y:0 Radius:100}
 
-	
 }
 
 func struct_array_slice() {
@@ -536,14 +535,14 @@ func struct_array_slice() {
 		value []int
 	}
 
-	var arr ArrayStruct = ArrayStruct {[...]int{0,1,2,3,4,5,6,7,8,9},}
-	var sli SliceStruct = SliceStruct {[]int{0,1,2,3,4,5,6,7,8,9}}
+	var arr ArrayStruct = ArrayStruct{[...]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}}
+	var sli SliceStruct = SliceStruct{[]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}}
 	fmt.Println(unsafe.Sizeof(arr), unsafe.Sizeof(sli))
 }
 
 type Circle struct {
-	x int
-	y int
+	x      int
+	y      int
 	Radius int
 }
 
@@ -560,7 +559,7 @@ func func_is_value() {
 	hypot := func(x, y float64) float64 {
 		return math.Sqrt(x*x + y*y)
 	}
-    fmt.Println(hypot)  // hypot是指向函数的指针？
+	fmt.Println(hypot) // hypot是指向函数的指针？
 	fmt.Println(hypot(3, 4))
 }
 
@@ -578,9 +577,8 @@ type Vertex struct {
 }
 
 func (v *Vertex) Abs() float64 {
-	return math.Sqrt(v.X * v.X + v.Y * v.Y)
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
-
 
 type MyFloat float64
 
@@ -591,83 +589,83 @@ func (f MyFloat) Abs() float64 {
 	return float64(f)
 }
 
-func main(){
+func main() {
 	fmt.Println("welcome to go!")
 	/*
-	fmt.Println("hello go!")
-	pointerfun()
-	gotype()
+		fmt.Println("hello go!")
+		pointerfun()
+		gotype()
 
-	max := max(4, 3)
-	print("max:", max)
+		max := max(4, 3)
+		print("max:", max)
 
-	min := min(32, 87)
-	print("\nmin:", min)
+		min := min(32, 87)
+		print("\nmin:", min)
 
-	sig := sig(0)
-	print("\nsig:", sig)
+		sig := sig(0)
+		print("\nsig:", sig)
 
-	flag := switch_value(70)
-	print("\nscore level:", flag)
+		flag := switch_value(70)
+		print("\nscore level:", flag)
 
-	flag = switch_expression(89)
-	print("\nscore level:", flag)
+		flag = switch_expression(89)
+		print("\nscore level:", flag)
 
-	for_type1()
+		for_type1()
 
-	print("\n")
-	for_loop()
-	
-	array_1()
-	
-	array_2()
+		print("\n")
+		for_loop()
 
-	array_3()
-	
-	array_assign()
+		array_1()
 
-	array_traversing()
+		array_2()
 
-	slice_create()
-	
-	empty_slice()
+		array_3()
 
-	slice_assign()
+		array_assign()
 
-	slice_traversing()
+		array_traversing()
 
-	slice_append()
+		slice_create()
 
-	slice_cut()
+		empty_slice()
 
-	array_to_slice()
+		slice_assign()
 
-	slice_copy()
-	
-	slice_expansion()
+		slice_traversing()
 
-	map_create()
+		slice_append()
 
-	map_ops()
+		slice_cut()
 
-	map_traversing()
+		array_to_slice()
 
-	map_sizeof()
+		slice_copy()
 
-	string_traversing_by_byte()
-	string_traversing_by_rune()
+		slice_expansion()
 
-	string_split()
+		map_create()
 
-	byte_string_conversion()
+		map_ops()
 
-	struct_create()
+		map_traversing()
 
-	zero_nil_struct()
+		map_sizeof()
 
-	struct_copy()
-   
-	struct_array_slice()*/
+		string_traversing_by_byte()
+		string_traversing_by_rune()
+
+		string_split()
+
+		byte_string_conversion()
+
+		struct_create()
+
+		zero_nil_struct()
+
+		struct_copy()
+
+		struct_array_slice()*/
 
 	// var c = Circle { Radius : 50 }
 	// struct_expandByValue(c)
@@ -680,14 +678,14 @@ func main(){
 
 	// pos, neg := adder(), adder()
 
-	for i :=0; i < 10; i++ {
+	for i := 0; i < 10; i++ {
 		// fmt.Println(pos(i), neg(-2 * i))
 	}
 
 	// v := &Vertex{3, 4}
 	// fmt.Println(v.Abs())
 
-	f := MyFloat(-math.Sqrt2)  // Sqrt2 = 1.41421356237309504880168872420969807856967187537694807317667974 // https://oeis.org/A002193
+	f := MyFloat(-math.Sqrt2) // Sqrt2 = 1.41421356237309504880168872420969807856967187537694807317667974 // https://oeis.org/A002193
 	fmt.Println(f)
 	fmt.Println(f.Abs())
 }

@@ -3,7 +3,6 @@ package fetcher
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -26,10 +25,12 @@ func Fetch(url string) ([]byte, error) {
 		// fmt.Println("Error: status code ", resp.StatusCode)
 		return nil, fmt.Errorf("wrong status code: %d", resp.StatusCode)
 	}
+
+	bodyReader := bufio.NewReader(resp.Body)
 	// 确定页面编码
-	e := determineEncoding(resp.Body)
+	e := determineEncoding(bodyReader)
 	// 转换编码，解决中文问题
-	utf8Reader := transform.NewReader(resp.Body, e.NewDecoder())
+	utf8Reader := transform.NewReader(bodyReader, e.NewDecoder())
 	// 读取页面内容
 	// all, err := ioutil.ReadAll(utf8Reader)
 	// if err != nil {
@@ -39,9 +40,9 @@ func Fetch(url string) ([]byte, error) {
 }
 
 // 猜测页面编码
-func determineEncoding(r io.Reader) encoding.Encoding {
+func determineEncoding(r *bufio.Reader) encoding.Encoding {
 	// 抽取1024
-	bytes, err := bufio.NewReader(r).Peek(1024)
+	bytes, err := r.Peek(1024)
 	if err != nil {
 		// panic(err)
 		log.Printf("Fetcher error: %v", err)
