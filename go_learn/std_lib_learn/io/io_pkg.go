@@ -82,10 +82,28 @@ func ioReader_3() {
 	fmt.Printf("size = %d\n", size)
 }
 
-func main() {
+//func main() {
 	// ioReader_1()
 	// ioReader_2()
 	// ioWriter_1()
 	// ioWriter_2()
-	ioReader_3()
+	// ioReader_3()
+//}
+
+func main() {
+	p:=&person{name:"张三"}
+	p.modify() //指针接收者，修改有效
+	fmt.Println(p.String())
+}
+
+type person struct {
+	name string
+}
+
+func (p person) String() string{
+	return "the person name is "+p.name
+}
+
+func (p *person) modify(){
+	p.name = "李四"
 }
