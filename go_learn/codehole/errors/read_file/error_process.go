@@ -42,7 +42,7 @@ func main() {
 		// 错误处理
 		if err != nil {
 			fmt.Println("---n:", n)
-			break // 读取完或读错误退出for循环
+			break // 读取完或读错误退出for循环，遇到流结束或者其它错误
 		}
 
 		if n > 0 {
