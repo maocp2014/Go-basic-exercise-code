@@ -17,6 +17,7 @@ func send(ch chan int, gap time.Duration) {
 // 多路复用 select 语句的读通道形式， 阻塞形式
 func recv(ch1 chan int, ch2 chan int) {
 	for {
+		// select读通道形式，阻塞形式
 		select {
 		case v := <-ch1:
 			fmt.Printf("recv %d from ch1\n", v)
