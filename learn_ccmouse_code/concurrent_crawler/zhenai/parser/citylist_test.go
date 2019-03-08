@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestParserCityList(t *testing.T) {
+func TestParseCityList(t *testing.T) {
 	contents, err := ioutil.ReadFile("citylist_test_data.html")
 
 	if err != nil {
@@ -21,7 +21,7 @@ func TestParserCityList(t *testing.T) {
 	}
 
 	expectedCitys := []string{
-		"阿坝", "阿克苏", "阿拉善盟",
+		"City 阿坝", "City 阿克苏", "City 阿拉善盟",
 	}
 
 	for i, url := range expectedUrls {
