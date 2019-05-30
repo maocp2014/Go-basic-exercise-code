@@ -29,6 +29,7 @@ func main() {
 		})
 	})
 
+	// 路由组使用中间件
 	v1 := engine.Group("/v1", MiddleWare())
 	// 或者这样用：
 	// v1 := engine.Group("/v1")
