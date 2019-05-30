@@ -25,6 +25,7 @@ func main() {
 */
 
 // 2、*组成路由参数
+/*
 func main() {
 	engine := gin.Default()
 	// *能匹配/字符串等参数
@@ -33,6 +34,24 @@ func main() {
 		action := c.Param("action")
 		message := name + " is " + action
 		c.String(http.StatusOK, message)
+	})
+
+	engine.Run()
+}
+*/
+
+// 3、分组路由
+func main() {
+	engine := gin.Default()
+
+	v1 := engine.Group("/v1")
+	v1.GET("/login", func(c *gin.Context) {
+		c.String(http.StatusOK, "v1 login")
+	})
+
+	v2 := engine.Group("/v2")
+	v2.GET("/login", func(c *gin.Context) {
+		c.String(http.StatusOK, "v2 login")
 	})
 
 	engine.Run()
