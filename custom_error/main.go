@@ -7,6 +7,10 @@ import (
 	myerr "go_pratice_code/custom_error/errors" // 包重命名
 )
 
+// error返回值是内置的接口
+// type error interface {
+//     Error() string
+// }
 func myErr() error {
 	err := myerr.NewError(2, "err test")
 	return err

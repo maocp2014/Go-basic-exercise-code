@@ -11,7 +11,10 @@ func NewError(code int, msg string) *Error {
 	return &Error{ErrCode: code, ErrMsg: msg}
 }
 
-// Error结构体方法，返回错误信息
+// Error结构体方法，返回错误信息，实现了error接口
+// type error interface {
+//     Error() string
+// }
 func (err *Error) Error() string {
 	return err.ErrMsg
 }
