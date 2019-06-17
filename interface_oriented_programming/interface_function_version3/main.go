@@ -2,20 +2,24 @@ package main
 
 import "fmt"
 
+// 接口型函数：指的是用函数实现接口，这样在调用的时候就会非常简便，这种函数为接口型函数，这种方式适用于只有一个函数的接口。
+
 type Handler interface {
 	Do(k, v interface{})
 }
 
 // 定义了一个新的类型HandlerFunc，它是一个func(k, v interface{})类型
+// 这个类型只定义了函数的参数列表，函数参数列表与接口定义的方法一致
 type HandlerFunc func(k, v interface{})
 
 // 新的HandlerFunc实现了Handler接口（函数实现Handler接口）
 // Do方法的实现是调用HandlerFunc本身，因为HandlerFunc类型的变量就是一个方法
 func (f HandlerFunc) Do(k, v interface{}) {
-	f(k, v)
+	f(k, v) // 接口的实现中调用自己本身。这样就使得可以用函数来实现接口功能，而不是定义类型并实现接口来实现接口功能
 }
 
-func Each(m map[interface{}]interface{}, h Handler) {
+// 第1种方法
+func Each(m map[interface{}]interface{}, h Handler) { // 传入一个实现了Handler接口的类型的实例
 	if m != nil && len(m) > 0 {
 		for k, v := range m {
 			h.Do(k, v)
@@ -23,8 +27,10 @@ func Each(m map[interface{}]interface{}, h Handler) {
 	}
 }
 
+// 第2种方法
 // 新增了一个EachFunc函数，帮助调用者强制转型，调用者就不用自己做了。
-func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) {
+// 第二种方式可以只传入一个函数，只要求参数列表一致，函数名字可随便起，类型也不用新定义，用起来很方便。
+func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) { // 传入了一个参数列表为接口所需实现函数的参数
 	Each(m, HandlerFunc(f)) // HandlerFunc(f)还是类型转换
 }
 
@@ -42,7 +48,6 @@ func main() {
 
 	EachFunc(persons, selfInfo)
 }
-
 
 /*
 延伸:
