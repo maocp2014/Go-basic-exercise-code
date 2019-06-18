@@ -18,7 +18,7 @@ func (f HandlerFunc) Do(k, v interface{}) {
 	f(k, v) // 接口的实现中调用自己本身。这样就使得可以用函数来实现接口功能，而不是定义类型并实现接口来实现接口功能
 }
 
-// 第1种方法
+// 第1种方法: 接口形式
 func Each(m map[interface{}]interface{}, h Handler) { // 传入一个实现了Handler接口的类型的实例
 	if m != nil && len(m) > 0 {
 		for k, v := range m {
@@ -27,7 +27,7 @@ func Each(m map[interface{}]interface{}, h Handler) { // 传入一个实现了Ha
 	}
 }
 
-// 第2种方法
+// 第2种方法：方法形式
 // 新增了一个EachFunc函数，帮助调用者强制转型，调用者就不用自己做了。
 // 第二种方式可以只传入一个函数，只要求参数列表一致，函数名字可随便起，类型也不用新定义，用起来很方便。
 func EachFunc(m map[interface{}]interface{}, f func(k, v interface{})) { // 传入了一个参数列表为接口所需实现函数的参数
@@ -56,11 +56,11 @@ type Handler interface {
 	ServeHTTP(ResponseWriter, *Request)
 }
 
-func Handle(pattern string, handler Handler) {
+func Handle(pattern string, handler Handler) {  // 接口形式
 	DefaultServeMux.Handle(pattern, handler)
 }
 
-func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {
+func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {  // 方法形式
 	DefaultServeMux.HandleFunc(pattern, handler)
 }
 */

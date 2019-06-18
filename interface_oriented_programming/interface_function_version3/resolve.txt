@@ -1,1 +1,4 @@
 现在解决了命名的问题，但是每次强制转型不太好，我们继续重构，可以采用新定义一个函数的方式，帮助调用者强制转型。
+
+https://www.flysnow.org/2016/12/30/golang-function-interface.html
+https://www.jianshu.com/p/7b3dc506c0e0?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
