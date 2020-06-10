@@ -1,2 +1,1 @@
-# go_pratice_code
-golang pratice code
+Go 练习代码
